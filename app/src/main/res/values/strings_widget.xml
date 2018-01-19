@@ -7,8 +7,4 @@
     <string name="update_lab">发现新版本</string>
     <string name="update_version_lab">%s版本特性：</string>
     <string name="update_failure">下载失败</string>
-
-    <string name="dialog_default_title">Here\'s a message!></string>
-    <string name="dialog_ok">OK</string>
-    <string name="dialog_cancel">Cancel</string>
 </resources>

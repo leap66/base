@@ -11,7 +11,7 @@ import android.support.annotation.NonNull;
 /**
  * 网络连接判断工具
  * <p>
- * </> Created by weiyaling on 2017/3/7.
+ * </> Created by weiyl on 2017/3/7.
  */
 
 public class NetworkUtil {
