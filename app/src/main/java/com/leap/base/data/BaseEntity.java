@@ -11,11 +11,8 @@ public class BaseEntity implements Serializable {
   private String id;
   private String user;
   private String name;
-  private String url;
   private String middle;
-  private String middleUrl;
   private String high;
-  private String highUrl;
   private String remark;
 
   public String getId() {
@@ -42,14 +39,6 @@ public class BaseEntity implements Serializable {
     this.name = name;
   }
 
-  public String getUrl() {
-    return url;
-  }
-
-  public void setUrl(String url) {
-    this.url = url;
-  }
-
   public String getMiddle() {
     return middle;
   }
@@ -58,28 +47,12 @@ public class BaseEntity implements Serializable {
     this.middle = middle;
   }
 
-  public String getMiddleUrl() {
-    return middleUrl;
-  }
-
-  public void setMiddleUrl(String middleUrl) {
-    this.middleUrl = middleUrl;
-  }
-
   public String getHigh() {
     return high;
   }
 
   public void setHigh(String high) {
     this.high = high;
-  }
-
-  public String getHighUrl() {
-    return highUrl;
-  }
-
-  public void setHighUrl(String highUrl) {
-    this.highUrl = highUrl;
   }
 
   public String getRemark() {
