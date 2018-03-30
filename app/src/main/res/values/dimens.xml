@@ -1,0 +1,28 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <dimen name="text_size_10">10dp</dimen>
+    <dimen name="text_size_12">12dp</dimen>
+    <dimen name="text_size_13">13dp</dimen>
+    <dimen name="text_size_14">14dp</dimen>
+    <dimen name="text_size_16">16dp</dimen>
+    <dimen name="text_size_18">18dp</dimen>
+    <dimen name="text_size_20">20dp</dimen>
+    <dimen name="text_size_24">24dp</dimen>
+    <dimen name="text_size_28">28dp</dimen>
+    <dimen name="text_size_30">30dp</dimen>
+    <dimen name="text_size_32">32dp</dimen>
+    <dimen name="text_size_36">36dp</dimen>
+    <dimen name="text_size_42">42dp</dimen>
+    <dimen name="text_size_48">48dp</dimen>
+
+    <!-- v0.1 统一字体大小规范 -->
+    <dimen name="hugeTitle">@dimen/text_size_32</dimen>
+    <dimen name="largeTitle">@dimen/text_size_28</dimen>
+    <dimen name="title">@dimen/text_size_24</dimen>
+    <dimen name="smallTitle">@dimen/text_size_18</dimen>
+    <dimen name="largeText">@dimen/text_size_16</dimen>
+    <dimen name="text">@dimen/text_size_14</dimen>
+    <dimen name="smallText">@dimen/text_size_13</dimen>
+    <dimen name="detail">@dimen/text_size_12</dimen>
+
+</resources>

@@ -1,27 +1,18 @@
 package com.leap.base.data;
 
-import java.io.Serializable;
+import com.leap.base.data.base.BEntity;
 
 /**
  * BaseEntity : 基础实体类
  * <p>
  * </> Created by ylwei on 2018/2/24.
  */
-public class BaseEntity implements Serializable {
-  private String id;
+public class BaseEntity extends BEntity {
   private String user;
   private String name;
   private String middle;
   private String high;
   private String remark;
-
-  public String getId() {
-    return id;
-  }
-
-  public void setId(String id) {
-    this.id = id;
-  }
 
   public String getUser() {
     return user;

@@ -6,7 +6,9 @@ import android.view.View;
 import android.widget.ImageView;
 
 import com.bumptech.glide.Glide;
+import com.bumptech.glide.request.RequestOptions;
 import com.jakewharton.rxbinding.view.RxView;
+import com.leap.base.R;
 
 import java.util.concurrent.TimeUnit;
 
@@ -19,9 +21,12 @@ import rx.functions.Action1;
  */
 public class AppBindingAdapter {
 
-  @BindingAdapter("imageResId")
-  public static void loadImage(ImageView view, int resourceId) {
-    Glide.with(view.getContext()).load(resourceId).into(view);
+  @BindingAdapter("resUrl")
+  public static void loadImageUrl(ImageView view, Object resourceUrl) {
+    RequestOptions options = new RequestOptions();
+    options.placeholder(R.mipmap.icon_placeholder);
+    options.error(R.mipmap.icon_placeholder);
+    Glide.with(view.getContext()).load(resourceUrl).apply(options).into(view);
   }
 
   @BindingAdapter("layoutManager")

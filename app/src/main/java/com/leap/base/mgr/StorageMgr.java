@@ -115,6 +115,36 @@ public class StorageMgr {
     }
   }
 
+  /**
+   * 获取对应key的缓存
+   */
+  public static boolean getBoolean(String key, String level, boolean defaultValue) {
+    String k = "";
+    if (IsEmpty.string(key) || IsEmpty.string(level)) {
+      return defaultValue;
+    } else {
+      BaseEntity temp = BaseMgr.getBaseEntity();
+      switch (level) {
+      case LEVEL_GLOBAL:
+        break;
+      case LEVEL_USER:
+        k += temp.getUser();
+        break;
+      case LEVEL_MIDDLE:
+        k += temp.getMiddle();
+        break;
+      case LEVEL_HIGH:
+        k += temp.getHigh();
+        break;
+      }
+      k += key;
+      String value = getStorage(k);
+      if (IsEmpty.string(value))
+        return defaultValue;
+      return Boolean.valueOf(value);
+    }
+  }
+
   // 设置缓存信息
   private static void setStorage(String key, String value) {
     SharedPreferences.Editor editor = storage.edit();

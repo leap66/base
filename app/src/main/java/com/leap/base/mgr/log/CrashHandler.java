@@ -3,9 +3,9 @@ package com.leap.base.mgr.log;
 import android.os.Process;
 
 /**
- * 页面描述：崩溃时自动捕获崩溃信息
+ * CrashHandler : 崩溃时自动捕获崩溃信息
  * <p>
- * Created by ditclear on 2016/11/23.
+ * </> Created by ylwei on 2018/3/1.
  */
 public final class CrashHandler implements Thread.UncaughtExceptionHandler {
   private static CrashHandler instance = new CrashHandler();

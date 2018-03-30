@@ -14,9 +14,11 @@ public class BaseMgr {
   private static BaseEntity entity;
 
   public static void init(Context context) {
+    // 初始化Context
     ContextMgr.init(context);
-    Key_Entity = context.getPackageName() + ".BaseEntity";
+    // 初始化缓存组件
     StorageMgr.init();
+    Key_Entity = context.getPackageName() + ".BaseEntity";
     entity = StorageMgr.get(Key_Entity, BaseEntity.class, StorageMgr.LEVEL_GLOBAL);
   }
 
@@ -25,7 +27,7 @@ public class BaseMgr {
     StorageMgr.set(Key_Entity, entity, StorageMgr.LEVEL_GLOBAL);
   }
 
-  public static BaseEntity getBaseEntity() {
+  static BaseEntity getBaseEntity() {
     return entity;
   }
 }

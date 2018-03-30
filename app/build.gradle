@@ -9,6 +9,12 @@ android {
         versionCode 1
         versionName "1.0"
         testInstrumentationRunner "android.support.test.runner.AndroidJUnitRunner"
+
+        multiDexEnabled true
+        ndk {
+            moduleName "jniLib"
+            abiFilters "armeabi", "armeabi-v7a", "x86"
+        }
     }
     dataBinding {
         enabled = true
@@ -17,6 +23,11 @@ android {
         release {
             minifyEnabled false
             proguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguard-rules.pro'
+        }
+    }
+    sourceSets {
+        main {
+            jniLibs.srcDirs = ['libs']
         }
     }
 }
@@ -29,16 +40,27 @@ dependencies {
     compile 'com.android.support:appcompat-v7:25.3.1'
     compile 'com.android.support.constraint:constraint-layout:1.0.2'
     testCompile 'junit:junit:4.12'
+    // databinding
     compile 'com.android.support:recyclerview-v7:25.3.1'
     compile 'com.github.markzhai:databinding-rv-adapter:1.0.1'
+    // retrofit2
     compile 'com.squareup.retrofit2:retrofit:2.1.0'
-    compile 'com.google.code.gson:gson:2.8.1'
     compile 'com.squareup.retrofit2:adapter-rxjava:2.1.0'
-    compile 'io.reactivex:rxandroid:1.2.1'
-    compile 'com.github.bumptech.glide:glide:3.7.0'
-    compile 'pub.devrel:easypermissions:0.4.3'
-    compile 'org.greenrobot:eventbus:3.0.0'
-    compile 'com.jakewharton.rxbinding:rxbinding:1.0.1'
-    compile 'commons-io:commons-io:2.4'
     compile 'com.squareup.okhttp3:logging-interceptor:3.3.1'
+    compile 'com.trello:rxlifecycle-components:1.0'
+    // gsom
+    compile 'com.google.code.gson:gson:2.8.1'
+    // rxbinding
+    compile 'io.reactivex:rxandroid:1.2.1'
+    compile 'com.jakewharton.rxbinding:rxbinding:1.0.1'
+
+    compile 'org.greenrobot:eventbus:3.0.0'
+    compile 'pub.devrel:easypermissions:0.4.3'
+    compile 'commons-io:commons-io:2.4'
+    compile 'top.zibin:Luban:1.1.2'
+    compile 'com.github.bumptech.glide:glide:4.0.0'
+    // 阿里云推送
+    compile 'com.aliyun.ams:alicloud-android-push:3.0.9@aar'
+    compile 'com.aliyun.ams:alicloud-android-utdid:1.1.5.3'
+    compile 'com.aliyun.ams:alicloud-android-ut:5.0.0'
 }

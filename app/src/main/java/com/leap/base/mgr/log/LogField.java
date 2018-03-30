@@ -1,10 +1,10 @@
 package com.leap.base.mgr.log;
 
 /**
- * Created by wangcong on 2017/6/22.
+ * LogField : 日志类字段
  * <p>
+ * </> Created by ylwei on 2018/3/1.
  */
-
 public class LogField {
 
   public static final String LEVEL = "level";
