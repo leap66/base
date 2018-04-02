@@ -21,8 +21,8 @@ import java.util.Map;
  * </> Created by ylwei on 2018/3/30.
  */
 public class LoadingLayout extends FrameLayout {
-  public static final Integer LOADING = 0;
-  public static final Integer CONTENT = 1;
+  private final Integer LOADING = 0;
+  private final Integer CONTENT = 1;
   private AnimationDrawable animationDrawable;
   private Integer currentIndex = 2;
   private boolean lock = true;
@@ -52,23 +52,29 @@ public class LoadingLayout extends FrameLayout {
    * 初始化View
    */
   private void initView() {
-    int childCount = getChildCount();
-    if (childCount != 1)
-      throw new RuntimeException("LoadingLayout didn't allow more than one child.");
     emptyView = View.inflate(getContext(), R.layout.dialog_base_loading, null);
     ImageView imageView = (ImageView) emptyView.findViewById(R.id.base_loading);
     animationDrawable = (AnimationDrawable) imageView.getDrawable();
     animationDrawable.start();
     emptyView.setClickable(lock);
-    viewMap.put(CONTENT, getChildAt(0));
     viewMap.put(LOADING, emptyView);
     addView(viewMap.get(LOADING));
+  }
+
+  // 启动加载
+  public void startLoading() {
+    show(LOADING);
+  }
+
+  // 停止加载
+  public void stopLoading() {
+    show(CONTENT);
   }
 
   /**
    * 展示某一种View
    */
-  public void show(@NonNull Integer state) {
+  private void show(@NonNull Integer state) {
     if (currentIndex.equals(state))
       return;
     viewMap.get(LOADING).setVisibility(LOADING.equals(state) ? VISIBLE : GONE);
