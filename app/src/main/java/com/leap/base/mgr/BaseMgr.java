@@ -20,6 +20,8 @@ public class BaseMgr {
     StorageMgr.init();
     Key_Entity = context.getPackageName() + ".BaseEntity";
     entity = StorageMgr.get(Key_Entity, BaseEntity.class, StorageMgr.LEVEL_GLOBAL);
+    if (entity == null)
+      entity = new BaseEntity();
   }
 
   public static void updateEntity(BaseEntity baseEntity) {

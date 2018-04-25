@@ -23,7 +23,7 @@ public class UpdateClient {
   private static Retrofit updateClient;
 
   // 未登陆之前使用该对象 没有Token
-  public static Retrofit updateClient() {
+  static Retrofit updateClient() {
 
     if (null != updateClient)
       return updateClient;

@@ -8,8 +8,6 @@ import android.support.v4.content.FileProvider;
 
 import com.leap.base.mgr.ContextMgr;
 
-import org.apache.commons.io.IOUtils;
-
 import java.io.BufferedOutputStream;
 import java.io.ByteArrayOutputStream;
 import java.io.File;
@@ -92,7 +90,8 @@ public class FileUtil {
       byte[] md5Sum = md.digest();
       return ByteArraytoHexString(md5Sum);
     } finally {
-      IOUtils.closeQuietly(is);
+      if (!IsEmpty.object(is))
+        is.close();
     }
   }
 
