@@ -23,7 +23,7 @@
             android:gravity="center"
             android:minWidth="100dp"
             android:padding="15dp"
-            android:textColor="@color/white"
+            android:textColor="#FFFFFF"
             android:textSize="18sp"/>
     </LinearLayout>
 </layout>

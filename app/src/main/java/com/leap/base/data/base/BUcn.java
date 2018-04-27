@@ -13,12 +13,14 @@ public class BUcn extends BEntity {
   public BUcn() {
   }
 
-  public BUcn(String code, String name) {
+  public BUcn(String id, String code, String name) {
+    setId(id);
     this.code = code;
     this.name = name;
   }
 
-  public BUcn(String code, String name, boolean newUcn) {
+  public BUcn(String id, String code, String name, boolean newUcn) {
+    setId(id);
     this.code = code;
     this.name = name;
     this.newUcn = newUcn;

@@ -15,6 +15,8 @@ public class DateUtil {
   public static String DEFAULT_DATE_FORMAT = "yyyy-MM-dd HH:mm:ss";
   public static String DEFAULT_DATE_FORMAT_1 = "yyyy-MM-dd";
   public static String DEFAULT_DATE_FORMAT_2 = "HH:mm";
+  public static String DEFAULT_DATE_FORMAT_3 = "EEEE";
+  public static String DEFAULT_DATE_FORMAT_4 = "yyyy年M月d日";
 
   public static String format(Date date, String format) {
     if (IsEmpty.object(date))
@@ -39,6 +41,7 @@ public class DateUtil {
     calendar.set(Calendar.HOUR_OF_DAY, 0);
     calendar.set(Calendar.MINUTE, 0);
     calendar.set(Calendar.SECOND, 0);
+    calendar.set(Calendar.MILLISECOND, 0);
     Date start = calendar.getTime();
     calendar.add(Calendar.DAY_OF_MONTH, 1);
     calendar.add(Calendar.MILLISECOND, -1);
