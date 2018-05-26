@@ -3,10 +3,7 @@ package com.leap.base.util;
 import android.content.res.Resources;
 import android.graphics.drawable.GradientDrawable;
 import android.os.Build;
-import android.support.v4.content.ContextCompat;
 import android.view.View;
-
-import com.leap.base.mgr.ContextMgr;
 
 /**
  * 代码设置View控件圆角边框背景颜色
@@ -32,10 +29,9 @@ public class ViewUtil {
     try {
       // 创建drawable
       GradientDrawable gd = new GradientDrawable();
-      gd.setStroke(DensityUtil.dp2px(strokeWidth),
-          ContextCompat.getColor(ContextMgr.getInstance(), strokeColor));
+      gd.setStroke(DensityUtil.dp2px(strokeWidth), strokeColor);
       gd.setCornerRadius(DensityUtil.dp2px(roundRadius));
-      gd.setColor(ContextCompat.getColor(ContextMgr.getInstance(), fillColor));
+      gd.setColor(fillColor);
       for (View view : views) {
         // 设置drawable
         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.JELLY_BEAN)

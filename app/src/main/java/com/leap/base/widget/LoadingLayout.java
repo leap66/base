@@ -26,7 +26,7 @@ public class LoadingLayout extends FrameLayout {
   private AnimationDrawable animationDrawable;
   private Integer currentIndex = 2;
   private boolean lock = true;
-  private View emptyView;
+  private View loadingView;
 
   @SuppressLint("UseSparseArrays")
   protected Map<Integer, View> viewMap = new HashMap<>();
@@ -52,12 +52,12 @@ public class LoadingLayout extends FrameLayout {
    * 初始化View
    */
   private void initView() {
-    emptyView = View.inflate(getContext(), R.layout.dialog_base_loading, null);
-    ImageView imageView = (ImageView) emptyView.findViewById(R.id.base_loading);
+    loadingView = View.inflate(getContext(), R.layout.dialog_base_loading, null);
+    ImageView imageView = (ImageView) loadingView.findViewById(R.id.base_loading);
     animationDrawable = (AnimationDrawable) imageView.getDrawable();
     animationDrawable.start();
-    emptyView.setClickable(lock);
-    viewMap.put(LOADING, emptyView);
+    loadingView.setClickable(lock);
+    viewMap.put(LOADING, loadingView);
     addView(viewMap.get(LOADING));
   }
 
@@ -84,7 +84,7 @@ public class LoadingLayout extends FrameLayout {
 
   public void setLock(boolean lock) {
     this.lock = lock;
-    if (emptyView != null)
-      emptyView.setClickable(lock);
+    if (loadingView != null)
+      loadingView.setClickable(lock);
   }
 }
