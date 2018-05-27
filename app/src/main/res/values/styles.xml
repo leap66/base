@@ -38,6 +38,20 @@
         <item name="android:background">@color/silverThree</item>
     </style>
 
+    <!--分割线-->
+    <style name="up_divider_title">
+        <item name="android:layout_width">0.5dp</item>
+        <item name="android:layout_height">match_parent</item>
+        <item name="android:background">@color/silverTwo</item>
+    </style>
+
+    <!--分割线-->
+    <style name="up_divider_item">
+        <item name="android:layout_width">0.5dp</item>
+        <item name="android:layout_height">match_parent</item>
+        <item name="android:background">@color/silverThree</item>
+    </style>
+
     <!--水平间隔符(隔开)-->
     <style name="space_horizontal">
         <item name="android:layout_width">0dp</item>
