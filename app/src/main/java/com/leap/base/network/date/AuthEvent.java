@@ -7,6 +7,7 @@ package com.leap.base.network.date;
  */
 public class AuthEvent {
   public static int TOKEN_EXPIRED = 1;
+  public static int EXIT = 2;
 
   public int type;
 
