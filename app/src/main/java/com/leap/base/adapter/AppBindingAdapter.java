@@ -1,6 +1,7 @@
 package com.leap.base.adapter;
 
 import android.databinding.BindingAdapter;
+import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.view.View;
 import android.widget.ImageView;
@@ -9,6 +10,7 @@ import com.bumptech.glide.Glide;
 import com.bumptech.glide.request.RequestOptions;
 import com.jakewharton.rxbinding.view.RxView;
 import com.leap.base.R;
+import com.leap.base.util.IsEmpty;
 
 import java.util.concurrent.TimeUnit;
 
@@ -29,14 +31,15 @@ public class AppBindingAdapter {
     Glide.with(view.getContext()).load(resourceUrl).apply(options).into(view);
   }
 
-  @BindingAdapter("layoutManager")
-  public static void setLayoutManager(RecyclerView view, RecyclerView.LayoutManager manager) {
-    view.setLayoutManager(manager);
-  }
-
   @BindingAdapter("adapter")
   public static void setAdapter(RecyclerView view, RecyclerView.Adapter adapter) {
     view.setAdapter(adapter);
+  }
+
+  @BindingAdapter("adapterAnd")
+  public static void setAdapterAnd(RecyclerView view, RecyclerView.Adapter adapter) {
+    view.setAdapter(adapter);
+    view.setLayoutManager(new LinearLayoutManager(view.getContext()));
   }
 
   /**
