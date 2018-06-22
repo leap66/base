@@ -6,9 +6,18 @@ package com.leap.base.data.base;
  * </> Created by ylwei on 2018/6/13.
  */
 public class BPhoto extends BEntity {
-  private String name;
   private String url;
+  private String name;
+  private String path;
   private boolean temp;
+
+  public String getUrl() {
+    return url;
+  }
+
+  public void setUrl(String url) {
+    this.url = url;
+  }
 
   public String getName() {
     return name;
@@ -18,12 +27,12 @@ public class BPhoto extends BEntity {
     this.name = name;
   }
 
-  public String getUrl() {
-    return url;
+  public String getPath() {
+    return path;
   }
 
-  public void setUrl(String url) {
-    this.url = url;
+  public void setPath(String path) {
+    this.path = path;
   }
 
   public boolean isTemp() {

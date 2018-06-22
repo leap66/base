@@ -7,13 +7,16 @@ import com.leap.base.util.IsEmpty;
  * <p>
  * </> Created by ylwei on 2018/3/30.
  */
-public class BAddress extends BEntity {
+public class BAddress extends StandardEntity {
   private BUcn province;// 省
   private BUcn city;// 市
   private BUcn district;// 区
   private BUcn street;// 街道
-  private String remark;// 详细地址
+  private String detail;// 街道门牌信息
+  private String remark;// 备注
   private String zipcode;// 邮政编码
+  private String contacts;// 联系人
+  private String phone;// 手机号码
 
   public BUcn getProvince() {
     return province;
@@ -47,6 +50,14 @@ public class BAddress extends BEntity {
     this.street = street;
   }
 
+  public String getDetail() {
+    return detail;
+  }
+
+  public void setDetail(String detail) {
+    this.detail = detail;
+  }
+
   public String getRemark() {
     return remark;
   }
@@ -63,6 +74,22 @@ public class BAddress extends BEntity {
     this.zipcode = zipcode;
   }
 
+  public String getContacts() {
+    return contacts;
+  }
+
+  public void setContacts(String contacts) {
+    this.contacts = contacts;
+  }
+
+  public String getPhone() {
+    return phone;
+  }
+
+  public void setPhone(String phone) {
+    this.phone = phone;
+  }
+
   @Override
   public String toString() {
     StringBuilder buffer = new StringBuilder();
@@ -74,8 +101,6 @@ public class BAddress extends BEntity {
       buffer.append(" ").append(district.getName());
     if (!IsEmpty.object(street) && !IsEmpty.object(street.getName()))
       buffer.append(" ").append(street.getName());
-    if (!IsEmpty.object(remark))
-      buffer.append(" ").append(remark);
     return buffer.toString();
   }
 }

@@ -1,11 +1,11 @@
 package com.leap.base.data.base;
 
 /**
- * BUcn : 多功能继承类
+ * BUcn : 通用类Mode
  * <p>
  * </> Created by ylwei on 2018/3/30.
  */
-public class BUcn extends BEntity {
+public class BUcn extends StandardEntity {
   private String code;
   private String name;
   private boolean newUcn;
