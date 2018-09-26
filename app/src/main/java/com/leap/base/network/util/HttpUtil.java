@@ -4,9 +4,10 @@ import android.content.Context;
 
 import com.google.gson.Gson;
 import com.leap.base.R;
+import com.leap.base.mgr.BaseMgr;
 import com.leap.base.mgr.ContextMgr;
-import com.leap.base.network.date.AuthEvent;
 import com.leap.base.network.date.ApiException;
+import com.leap.base.network.date.AuthEvent;
 import com.leap.base.network.date.TokenExpiredException;
 import com.leap.base.util.GsonUtil;
 import com.leap.base.util.IsEmpty;
@@ -17,6 +18,7 @@ import org.json.JSONException;
 import java.io.IOException;
 import java.net.SocketException;
 import java.net.SocketTimeoutException;
+import java.util.UUID;
 
 import okhttp3.Response;
 
@@ -71,5 +73,14 @@ public class HttpUtil {
 
   public static Gson getHttpGson() {
     return GsonUtil.getInstance();
+  }
+
+  public static String getTraceId() {
+    if (!IsEmpty.object(BaseMgr.getBaseEntity())
+        && !IsEmpty.string(BaseMgr.getBaseEntity().getId())) {
+      return BaseMgr.getBaseEntity().getId() + "-" + System.currentTimeMillis();
+    } else {
+      return UUID.randomUUID().toString();
+    }
   }
 }

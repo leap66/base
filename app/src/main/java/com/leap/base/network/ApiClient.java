@@ -34,9 +34,10 @@ public class ApiClient {
       Request request;
       String token = TokenMgr.getUserToken();
       if (!IsEmpty.string(token)) {
-        request = chain.request().newBuilder().addHeader("Cookie", token).build();
+        request = chain.request().newBuilder().addHeader("Cookie", token)
+            .addHeader("trace_id", HttpUtil.getTraceId()).build();
       } else {
-        request = chain.request();
+        request = chain.request().newBuilder().addHeader("trace_id", HttpUtil.getTraceId()).build();
       }
       return chain.proceed(request);
     }

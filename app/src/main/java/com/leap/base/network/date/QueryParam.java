@@ -50,6 +50,29 @@ public class QueryParam implements Serializable {
     this.sorters = sorters;
   }
 
+  public void nextPage() {
+    this.start = this.start + this.getLimit();
+  }
+
+  public void resetPage() {
+    position = this.start;
+    this.start = 0;
+  }
+
+  // 存储 resetPage 之前的 start
+  private transient int position;
+
+  public void prePage(boolean refresh) {
+    if (refresh) {
+      this.start = position;
+    } else {
+      this.start = this.start - this.getLimit();
+      if (this.start < 0) {
+        this.start = 0;
+      }
+    }
+  }
+
   public FilterParam findFilter(String property) {
     for (FilterParam param : getFilters()) {
       if (property.equals(param.getProperty())) {

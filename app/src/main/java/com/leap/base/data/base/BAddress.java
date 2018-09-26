@@ -16,7 +16,7 @@ public class BAddress extends StandardEntity {
   private String remark;// 备注
   private String zipcode;// 邮政编码
   private String contacts;// 联系人
-  private String phone;// 手机号码
+  private String mobile;// 手机号码
 
   public BUcn getProvince() {
     return province;
@@ -82,12 +82,12 @@ public class BAddress extends StandardEntity {
     this.contacts = contacts;
   }
 
-  public String getPhone() {
-    return phone;
+  public String getMobile() {
+    return mobile;
   }
 
-  public void setPhone(String phone) {
-    this.phone = phone;
+  public void setMobile(String mobile) {
+    this.mobile = mobile;
   }
 
   @Override

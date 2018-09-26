@@ -29,7 +29,7 @@ public class BaseMgr {
     StorageMgr.set(Key_Entity, entity, StorageMgr.LEVEL_GLOBAL);
   }
 
-  static BaseEntity getBaseEntity() {
+  public static BaseEntity getBaseEntity() {
     return entity;
   }
 }
