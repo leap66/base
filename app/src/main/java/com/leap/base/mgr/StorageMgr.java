@@ -3,9 +3,15 @@ package com.leap.base.mgr;
 import android.content.Context;
 import android.content.SharedPreferences;
 
+import com.google.gson.JsonArray;
+import com.google.gson.JsonElement;
+import com.google.gson.JsonParser;
 import com.leap.base.data.BaseEntity;
 import com.leap.base.util.GsonUtil;
 import com.leap.base.util.IsEmpty;
+
+import java.util.ArrayList;
+import java.util.List;
 
 /**
  * StorageMgr : 物理缓存管理
@@ -13,10 +19,10 @@ import com.leap.base.util.IsEmpty;
  * </> Created by ylwei on 2018/2/24.
  */
 public class StorageMgr {
-  public static final String LEVEL_USER = "user";// 用户级别（必需登录后使用）（默认级别）
-  public static final String LEVEL_MIDDLE = "middle";// 中级缓存（必需选择门店后使用）
-  public static final String LEVEL_HIGH = "high";// 中级缓存（必需选择门店后使用）
-  public static final String LEVEL_GLOBAL = "global";// 全局级别
+  public static final String LEVEL_USER = "storage_user";// 用户级别（必需登录后使用）（默认级别）
+  public static final String LEVEL_GLOBAL = "storage_global";// 全局级别
+  public static final String LEVEL_EXPERT = "storage_expert";// 专业级缓存
+  public static final String LEVEL_NORMAL = "storage_normal";// 普通级缓存
   private static SharedPreferences storage;
 
   // 初始化缓存管理
@@ -39,42 +45,15 @@ public class StorageMgr {
     set(key, GsonUtil.toJson(t), level);
   }
 
-  /**
-   * 缓存数据 t 级别 level
-   */
   public static void set(String key, String value, String level) throws RuntimeException {
-    String k = "";
-    if (IsEmpty.string(level)) {
-      setStorage(k, value);
-    } else {
-      BaseEntity temp = BaseMgr.getBaseEntity();
-      switch (level) {
-      case LEVEL_GLOBAL:
-        break;
-      case LEVEL_USER:
-        k += temp.getUser();
-        break;
-      case LEVEL_MIDDLE:
-        k += temp.getMiddle();
-        break;
-      case LEVEL_HIGH:
-        k += temp.getHigh();
-        break;
-      }
-      k += key;
-      setStorage(k, value);
-    }
+    setStorage(getKey(key, level), value);
   }
 
   /**
    * 获取对应key的缓存
    */
   public static <T> T get(String key, Class<T> c) {
-    String value = get(key, StorageMgr.LEVEL_USER);
-    if (value == null) {
-      return null;
-    }
-    return GsonUtil.parse(value, c);
+    return get(key, c, StorageMgr.LEVEL_USER);
   }
 
   /**
@@ -92,57 +71,33 @@ public class StorageMgr {
    * 获取对应key的缓存
    */
   public static String get(String key, String level) {
-    String k = "";
-    if (IsEmpty.string(level)) {
-      return getStorage(k);
-    } else {
-      BaseEntity temp = BaseMgr.getBaseEntity();
-      switch (level) {
-      case LEVEL_GLOBAL:
-        break;
-      case LEVEL_USER:
-        k += temp.getUser();
-        break;
-      case LEVEL_MIDDLE:
-        k += temp.getMiddle();
-        break;
-      case LEVEL_HIGH:
-        k += temp.getHigh();
-        break;
-      }
-      k += key;
-      return getStorage(k);
-    }
+    return getStorage(getKey(key, level));
   }
 
   /**
    * 获取对应key的缓存
    */
   public static boolean getBoolean(String key, String level, boolean defaultValue) {
-    String k = "";
-    if (IsEmpty.string(key) || IsEmpty.string(level)) {
+    String value = getStorage(getKey(key, level));
+    if (IsEmpty.string(value))
       return defaultValue;
-    } else {
-      BaseEntity temp = BaseMgr.getBaseEntity();
-      switch (level) {
-      case LEVEL_GLOBAL:
-        break;
-      case LEVEL_USER:
-        k += temp.getUser();
-        break;
-      case LEVEL_MIDDLE:
-        k += temp.getMiddle();
-        break;
-      case LEVEL_HIGH:
-        k += temp.getHigh();
-        break;
-      }
-      k += key;
-      String value = getStorage(k);
-      if (IsEmpty.string(value))
-        return defaultValue;
-      return Boolean.valueOf(value);
+    return Boolean.valueOf(value);
+  }
+
+  /**
+   * 获取对应key的缓存
+   */
+  public static <T> List<T> getList(String key, Class<T> c, String level) {
+    String value = get(key, level);
+    if (value == null) {
+      return null;
     }
+    List<T> list = new ArrayList<>();
+    JsonArray array = new JsonParser().parse(value).getAsJsonArray();
+    for (JsonElement elem : array) {
+      list.add(GsonUtil.parse(elem.toString(), c));
+    }
+    return list;
   }
 
   // 设置缓存信息
@@ -158,4 +113,26 @@ public class StorageMgr {
     return storage.getString(key, null);
   }
 
+  // 获取key
+  private static String getKey(String key, String level) {
+    String k = "";
+    if (!IsEmpty.string(key) && !IsEmpty.string(level)) {
+      BaseEntity temp = BaseMgr.getBaseEntity();
+      switch (level) {
+      case LEVEL_GLOBAL:
+        break;
+      case LEVEL_USER:
+        k += temp.getUser();
+        break;
+      case LEVEL_EXPERT:
+        k += temp.getExpert();
+        break;
+      case LEVEL_NORMAL:
+        k += temp.getNormal();
+        break;
+      }
+      k += key;
+    }
+    return k;
+  }
 }

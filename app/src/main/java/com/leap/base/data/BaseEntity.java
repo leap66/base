@@ -10,8 +10,8 @@ import com.leap.base.data.base.BEntity;
 public class BaseEntity extends BEntity {
   private String user;
   private String name;
-  private String middle;
-  private String high;
+  private String expert;
+  private String normal;
   private String remark;
 
   public String getUser() {
@@ -30,20 +30,20 @@ public class BaseEntity extends BEntity {
     this.name = name;
   }
 
-  public String getMiddle() {
-    return middle;
+  public String getExpert() {
+    return expert;
   }
 
-  public void setMiddle(String middle) {
-    this.middle = middle;
+  public void setExpert(String expert) {
+    this.expert = expert;
   }
 
-  public String getHigh() {
-    return high;
+  public String getNormal() {
+    return normal;
   }
 
-  public void setHigh(String high) {
-    this.high = high;
+  public void setNormal(String normal) {
+    this.normal = normal;
   }
 
   public String getRemark() {
