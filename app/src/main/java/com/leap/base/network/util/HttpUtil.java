@@ -18,7 +18,6 @@ import org.json.JSONException;
 import java.io.IOException;
 import java.net.SocketException;
 import java.net.SocketTimeoutException;
-import java.util.UUID;
 
 import okhttp3.Response;
 
@@ -77,10 +76,10 @@ public class HttpUtil {
 
   public static String getTraceId() {
     if (!IsEmpty.object(BaseMgr.getBaseEntity())
-        && !IsEmpty.string(BaseMgr.getBaseEntity().getId())) {
-      return BaseMgr.getBaseEntity().getId() + "-" + System.currentTimeMillis();
+        && !IsEmpty.string(BaseMgr.getBaseEntity().getUser())) {
+      return BaseMgr.getBaseEntity().getUser() + "-" + System.currentTimeMillis();
     } else {
-      return UUID.randomUUID().toString();
+      return String.valueOf(System.currentTimeMillis());
     }
   }
 }

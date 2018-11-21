@@ -2,6 +2,7 @@ package com.leap.base.network.subscriber;
 
 import android.content.Context;
 
+import com.leap.base.mgr.log.LogUtil;
 import com.leap.base.network.date.Response;
 import com.leap.base.network.util.HttpUtil;
 import com.leap.base.util.IsEmpty;
@@ -40,6 +41,7 @@ public abstract class HttpSubscriber<T> extends rx.Subscriber<Response<T>> {
     if (!IsEmpty.object(loadingDialog) && loadingDialog.isShowing())
       loadingDialog.dismiss();
     onFailure(HttpUtil.parseThrowable(throwable), null);
+    LogUtil.e(getClass().getSimpleName(), "error", throwable);
   }
 
   @Override

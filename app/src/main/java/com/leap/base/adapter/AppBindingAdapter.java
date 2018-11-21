@@ -10,7 +10,6 @@ import com.bumptech.glide.Glide;
 import com.bumptech.glide.request.RequestOptions;
 import com.jakewharton.rxbinding.view.RxView;
 import com.leap.base.R;
-import com.leap.base.util.IsEmpty;
 
 import java.util.concurrent.TimeUnit;
 

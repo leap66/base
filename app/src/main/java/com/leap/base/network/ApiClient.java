@@ -2,8 +2,8 @@ package com.leap.base.network;
 
 import com.leap.base.mgr.TokenMgr;
 import com.leap.base.mgr.log.ErrorLogInterceptor;
-import com.leap.base.network.util.NullOnEmptyConverterFactory;
 import com.leap.base.network.util.HttpUtil;
+import com.leap.base.network.util.NullOnEmptyConverterFactory;
 import com.leap.base.network.util.RequestErrorInterceptor;
 import com.leap.base.util.IsEmpty;
 import com.leap.base.util.gsonconverter.GsonConverterFactory;
@@ -25,7 +25,6 @@ import retrofit2.adapter.rxjava.RxJavaCallAdapterFactory;
  */
 public class ApiClient {
   private static String baseUrl;
-  private static Retrofit platformClient;
 
   // 获取用户Cookie并设置Cookie到header
   private static Interceptor setUserCookie = new Interceptor() {
@@ -59,21 +58,16 @@ public class ApiClient {
 
   // 未登陆之前使用该对象 没有Token
   static Retrofit platformClient() {
-    if (null != platformClient) {
-      return platformClient;
-    }
     HttpLoggingInterceptor logging = new HttpLoggingInterceptor();
     logging.setLevel(HttpLoggingInterceptor.Level.BODY);
     OkHttpClient okClient = new OkHttpClient.Builder().retryOnConnectionFailure(true)
-        .addInterceptor(logging)//
-        .addInterceptor(getUserCookie).addInterceptor(setUserCookie)
-        .addInterceptor(new ErrorLogInterceptor())//
+        .addInterceptor(getUserCookie).addInterceptor(setUserCookie)//
+        .addInterceptor(logging).addInterceptor(new ErrorLogInterceptor())//
         .addInterceptor(new RequestErrorInterceptor()).build();
-    platformClient = new Retrofit.Builder().baseUrl(baseUrl).client(okClient)
+    Retrofit platformClient = new Retrofit.Builder().baseUrl(baseUrl).client(okClient)
         .addConverterFactory(new NullOnEmptyConverterFactory())
         .addConverterFactory(GsonConverterFactory.create(HttpUtil.getHttpGson()))
         .addCallAdapterFactory(RxJavaCallAdapterFactory.create()).build();
-
     return platformClient;
   }
 

@@ -53,34 +53,14 @@ public class GsonUtil {
    */
   public static Gson getInstance() {
     if (IsEmpty.object(instance))
-      instance = new GsonBuilder().serializeNulls()
+      instance = new GsonBuilder().serializeNulls().setDateFormat(dateFormat)
           .excludeFieldsWithModifiers(Modifier.FINAL, Modifier.TRANSIENT, Modifier.STATIC)
-          .registerTypeAdapter(String.class, new StringConverter())
           .registerTypeAdapter(Date.class, new DateConverter()).create();
     return instance;
   }
 
-  /**
-   * 实现了 序列化 接口 对为null的字段进行转换
-   */
-  private static class StringConverter implements JsonSerializer<String>, JsonDeserializer<String> {
-    // 字符串为null 转换成"",否则为字符串类型
-    @Override
-    public String deserialize(JsonElement json, Type typeOfT, JsonDeserializationContext context)
-        throws JsonParseException {
-      if (IsEmpty.object(json.getAsJsonPrimitive()))
-        return null;
-      return json.getAsJsonPrimitive().getAsString();
-    }
-
-    @Override
-    public JsonElement serialize(String src, Type typeOfSrc, JsonSerializationContext context) {
-      return src == null || src.equals("null") ? new JsonPrimitive("") : new JsonPrimitive(src);
-    }
-  }
-
   private static class DateConverter implements JsonDeserializer<Date>, JsonSerializer<Date> {
-    SimpleDateFormat sdf = new SimpleDateFormat(dateFormat, Locale.CHINA);
+    SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss", Locale.CHINA);
 
     @Override
     public Date deserialize(JsonElement json, Type typeOfT, JsonDeserializationContext context)
@@ -101,5 +81,4 @@ public class GsonUtil {
       return new JsonPrimitive(sdf.format(src));
     }
   }
-
 }
