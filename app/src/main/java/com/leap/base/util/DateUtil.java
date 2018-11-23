@@ -1,6 +1,5 @@
 package com.leap.base.util;
 
-import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.Calendar;
 import java.util.Date;
@@ -25,11 +24,14 @@ public class DateUtil {
     return sdf.format(date);
   }
 
-  public static Date parse(String date, String format) throws ParseException {
-    if (IsEmpty.object(date))
-      return null;
-    SimpleDateFormat sdf = new SimpleDateFormat(format, Locale.CHINA);
-    return sdf.parse(date);
+  public static Date parse(String date, String format) {
+    try {
+      SimpleDateFormat sdf = new SimpleDateFormat(format, Locale.CHINA);
+      return sdf.parse(date);
+    } catch (Exception e) {
+      e.printStackTrace();
+    }
+    return null;
   }
 
   // 获取某一天的开始时间或结束时间(最大为当前时间)

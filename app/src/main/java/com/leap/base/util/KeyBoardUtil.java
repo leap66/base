@@ -3,6 +3,10 @@ package com.leap.base.util;
 import android.content.Context;
 import android.view.View;
 import android.view.inputmethod.InputMethodManager;
+import android.widget.EditText;
+
+import java.util.Timer;
+import java.util.TimerTask;
 
 /**
  * KeyBoardUtil : 键盘显示工具
@@ -10,6 +14,16 @@ import android.view.inputmethod.InputMethodManager;
  * </> Created by ylwei on 2018/3/26.
  */
 public class KeyBoardUtil {
+
+  // 延时显示软键盘
+  public static void showSoftKey(final EditText inputField) {
+    Timer timer = new Timer();
+    timer.schedule(new TimerTask() {
+      public void run() {
+        KeyBoardUtil.keyShow(inputField, true);
+      }
+    }, 500);
+  }
 
   /**
    * 显示或取消软键盘

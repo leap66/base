@@ -34,6 +34,7 @@ import java.io.InputStreamReader;
 import java.io.LineNumberReader;
 import java.io.Reader;
 import java.io.UnsupportedEncodingException;
+import java.lang.reflect.Method;
 import java.net.Inet4Address;
 import java.net.InetAddress;
 import java.net.NetworkInterface;
@@ -150,7 +151,7 @@ public class DeviceInfoUtil {
    * 获取唯一标识码
    */
   @SuppressLint({
-      "HardwareIds", "ApplySharedPref" })
+      "HardwareIds", "ApplySharedPref", "MissingPermission" })
   public synchronized static String getUDID() {
     Context mContext = ContextMgr.getInstance();
     if (uuid == null) {
@@ -205,6 +206,7 @@ public class DeviceInfoUtil {
   /**
    * 获取基站信息
    */
+  @SuppressLint("MissingPermission")
   public static JsonElement getCellInfo() throws JSONException {
     Context context = ContextMgr.getInstance();
     if (ContextCompat.checkSelfPermission(context,
@@ -498,5 +500,19 @@ public class DeviceInfoUtil {
     int dens = dm.densityDpi;
     double screenInches = diagonal / (double) dens;
     return df.format(screenInches);
+  }
+
+  @SuppressLint("PrivateApi")
+  public static String getCPUType() {
+    String properties = "android.os.SystemProperties";
+    String key = "ro.product.cpu.abi";
+    try {
+      Class<?> clazz = Class.forName(properties);
+      Method get = clazz.getMethod("get", String.class, String.class);
+      return (String) (get.invoke(clazz, key, ""));
+    } catch (Exception e) {
+      e.printStackTrace();
+    }
+    return "";
   }
 }
