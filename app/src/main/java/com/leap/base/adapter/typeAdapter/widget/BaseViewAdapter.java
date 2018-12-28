@@ -15,7 +15,7 @@ import java.util.List;
 public abstract class BaseViewAdapter<T> extends RecyclerView.Adapter<BindingViewHolder> {
   protected final LayoutInflater mLayoutInflater;
   protected List<T> mCollection;
-  private Presenter mPresenter;
+  protected Presenter mPresenter;
   private Decorator mDecorator;
 
   public interface Presenter {
